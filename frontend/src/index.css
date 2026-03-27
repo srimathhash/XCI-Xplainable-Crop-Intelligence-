@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: linear-gradient(180deg, #eef7f1, #e6f2eb);
+    color: #1b4332;
+    -webkit-font-smoothing: antialiased;
+    min-height: auto;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-weight: 600;
+    color: #1b4332;
+  }
+
+  h1 {
+    @apply text-[48px] leading-[1.5];
+  }
+
+  h2 {
+    @apply text-[32px] leading-[1.5];
+  }
+
+  h3 {
+    @apply text-[22px] leading-[1.5];
+  }
+
+  p {
+    @apply text-[16px] leading-[1.5];
+    color: #6c757d;
+  }
+
+  small {
+    @apply text-[14px] leading-[1.5];
+    color: #6c757d;
+  }
+}
+
+@layer components {
+
+  /* Glassmorphism Card (Strict Rule) */
+  .glass-card {
+    background: rgba(255, 255, 255, 0.85);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+    transition: all 0.25s ease;
+  }
+
+  .glass-card:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+  }
+
+  .glass-card-green:hover {
+    box-shadow: 0 10px 30px rgba(34, 139, 34, 0.25);
+  }
+
+  .click-feedback:active {
+    transform: scale(0.97);
+    transition: transform 0.1s;
+  }
+
+  .shimmer-wrapper {
+    position: relative;
+    overflow: hidden;
+    background-color: rgba(200, 200, 200, 0.2);
+    border-radius: 8px;
+  }
+
+  .shimmer-wrapper::after {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: translateX(-100%);
+    background-image: linear-gradient(90deg,
+        rgba(255, 255, 255, 0) 0,
+        rgba(255, 255, 255, 0.5) 20%,
+        rgba(255, 255, 255, 0.8) 60%,
+        rgba(255, 255, 255, 0));
+    animation: shimmer 1.5s infinite;
+    content: '';
+  }
+
+  /* Buttons */
+  .btn-primary {
+    @apply bg-primary-500 hover:bg-primary-600 text-white font-semibold py-16 px-32 rounded-pill transition-all duration-200 active:scale-95 shadow-sm hover:shadow-md disabled:opacity-50 disabled:cursor-not-allowed disabled:active:scale-100 flex items-center justify-center;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent hover:bg-white/50 text-[#111827] font-semibold py-16 px-32 rounded-pill border border-white/50 transition-all duration-200 active:scale-95 shadow-sm;
+  }
+
+  /* Input */
+  .input-field {
+    @apply w-full px-16 h-[48px] bg-white/50 backdrop-blur-sm border border-white/50 rounded-input text-[16px] text-appDarkText placeholder-appSecondaryText focus:outline-none focus:ring-2 focus:ring-primary-500 focus:bg-white transition-all duration-200;
+  }
+
+  /* Active Nav highlighting */
+  .nav-active {
+    @apply text-primary-500 font-semibold;
+  }
+
+  /* Badge */
+  .badge-green {
+    @apply inline-flex items-center px-16 py-8 rounded-pill text-[14px] font-semibold bg-primary-100 text-primary-800;
+  }
+
+  .badge-blue {
+    @apply inline-flex items-center px-16 py-8 rounded-pill text-[14px] font-semibold bg-blue-100 text-blue-800;
+  }
+
+  /* Loading spinner */
+  .spinner {
+    @apply inline-block w-24 h-24 border-2 border-white border-t-transparent rounded-full animate-spin;
+  }
+}
+
+@layer utilities {
+  .scrollbar-hide::-webkit-scrollbar {
+    display: none;
+  }
+
+  .scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+
+  .dashboard-container {
+    max-width: 1280px;
+    width: 100%;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 300px;
+    gap: 20px;
+    align-items: start;
+    min-height: auto;
+  }
+
+  @media (max-width: 1200px) {
+    .dashboard-container {
+      grid-template-columns: 1fr;
+    }
+
+    .weather-panel {
+      width: 100% !important;
+      position: static !important;
+    }
+  }
+
+  .main-content {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .history-container {
+    display: flex;
+    overflow-x: auto;
+    gap: 16px;
+    padding-bottom: 8px;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+    max-width: 100%;
+  }
+
+  .history-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .history-card {
+    flex: 0 0 220px;
+    scroll-snap-align: start;
+  }
+
+  .history-section {
+    margin-top: 10px;
+    margin-bottom: 20px;
+  }
+
+  .weather-panel {
+    width: 300px;
+    position: sticky;
+    top: 90px;
+  }
+}

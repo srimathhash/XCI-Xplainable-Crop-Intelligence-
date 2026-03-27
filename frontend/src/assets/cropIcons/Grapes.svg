@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" fill="none">
+    <circle cx="50" cy="50" r="48" fill="#e8f5e9" />
+    <path d="M50 20 L50 40" stroke="#16a34a" stroke-width="4"/>
+    <circle cx="40" cy="40" r="10" fill="#a855f7" stroke="#7e22ce" stroke-width="2"/>
+    <circle cx="60" cy="40" r="10" fill="#a855f7" stroke="#7e22ce" stroke-width="2"/>
+    <circle cx="30" cy="55" r="10" fill="#a855f7" stroke="#7e22ce" stroke-width="2"/>
+    <circle cx="50" cy="55" r="10" fill="#c084fc" stroke="#7e22ce" stroke-width="2"/>
+    <circle cx="70" cy="55" r="10" fill="#a855f7" stroke="#7e22ce" stroke-width="2"/>
+    <circle cx="40" cy="70" r="10" fill="#a855f7" stroke="#7e22ce" stroke-width="2"/>
+    <circle cx="60" cy="70" r="10" fill="#a855f7" stroke="#7e22ce" stroke-width="2"/>
+    <circle cx="50" cy="85" r="10" fill="#c084fc" stroke="#7e22ce" stroke-width="2"/>
+</svg>

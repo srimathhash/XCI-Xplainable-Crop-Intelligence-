@@ -1,0 +1,7 @@
+{
+    "name": "agrisen-root",
+    "version": "1.0.0",
+    "description": "Root folder for AgriSen",
+    "scripts": {},
+    "devDependencies": {}
+}

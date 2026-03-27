@@ -1,0 +1,135 @@
+import React, { useState, useRef, useEffect } from 'react'
+import { Bot, X, Send, User, Sprout } from 'lucide-react'
+import { sendChatMessage } from '../services/api'
+
+export default function AIChatAssistant() {
+    const [isOpen, setIsOpen] = useState(false)
+    const [messages, setMessages] = useState([
+        { role: 'ai', content: "Hello! I'm the AgriSen AI Assistant. Ask me anything about farming, crops, fertilizers, or how to use this platform." }
+    ])
+    const [inputValue, setInputValue] = useState('')
+    const [isTyping, setIsTyping] = useState(false)
+    const messagesEndRef = useRef(null)
+
+    const scrollToBottom = () => {
+        messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+    }
+
+    useEffect(() => {
+        if (isOpen) {
+            scrollToBottom()
+        }
+    }, [messages, isOpen, isTyping])
+
+    const handleSend = async () => {
+        if (!inputValue.trim()) return
+
+        const userMsg = { role: 'user', content: inputValue.trim() }
+        setMessages(prev => [...prev, userMsg])
+        setInputValue('')
+        setIsTyping(true)
+
+        try {
+            const res = await sendChatMessage({ message: userMsg.content })
+            const aiMsg = { role: 'ai', content: res.data.reply }
+            setMessages(prev => [...prev, aiMsg])
+        } catch (error) {
+            console.error("AI Chat Error:", error)
+            setMessages(prev => [...prev, { role: 'ai', content: "I am currently unable to access the AI service, but I can still help explain farming concepts and how to use this application." }])
+        } finally {
+            setIsTyping(false)
+        }
+    }
+
+    const handleKeyDown = (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault()
+            handleSend()
+        }
+    }
+
+    return (
+        <div className="fixed bottom-24 right-24 z-50 flex flex-col items-end">
+
+            {/* Chat Window */}
+            {isOpen && (
+                <div className="mb-16 w-[340px] h-[480px] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-black/5 animate-fade-in group">
+                    {/* Header */}
+                    <div className="bg-primary-600 text-white h-[56px] px-16 flex items-center justify-between shrink-0">
+                        <div className="flex items-center gap-12">
+                            <div className="w-[45px] h-[45px] bg-white/20 rounded-full flex items-center justify-center shrink-0">
+                                <Sprout size={24} className="text-white" />
+                            </div>
+                            <div>
+                                <h3 className="font-bold text-[16px] leading-[1.2]">AgriSen AI Assistant</h3>
+                                <p className="text-[12px] text-white/80 font-medium">Ask anything about farming</p>
+                            </div>
+                        </div>
+                        <button
+                            onClick={() => setIsOpen(false)}
+                            className="w-[32px] h-[32px] rounded-full hover:bg-white/20 flex items-center justify-center transition-colors shrink-0"
+                        >
+                            <X size={20} />
+                        </button>
+                    </div>
+
+                    {/* Messages Area */}
+                    <div className="flex-1 p-16 overflow-y-auto flex flex-col gap-16 bg-[#F8FAFC]">
+                        {messages.map((msg, idx) => {
+                            const isUser = msg.role === 'user'
+                            return (
+                                <div key={idx} className={`flex gap-8 max-w-[85%] animate-slide-in-bottom ${isUser ? 'self-end flex-row-reverse' : 'self-start'}`}>
+                                    <div className={`w-[28px] h-[28px] rounded-full flex items-center justify-center shrink-0 mt-4 ${isUser ? 'bg-primary-100 text-primary-700' : 'bg-gray-200 text-gray-700'}`}>
+                                        {isUser ? <User size={16} /> : <Bot size={16} />}
+                                    </div>
+                                    <div className={`p-[10px] rounded-2xl text-[14px] leading-[1.5] ${isUser ? 'bg-primary-500 text-white rounded-tr-none' : 'bg-gray-100 border border-black/5 text-appDarkText rounded-tl-none shadow-sm'}`}>
+                                        {msg.content}
+                                    </div>
+                                </div>
+                            )
+                        })}
+
+                        {isTyping && (
+                            <div className="flex gap-8 max-w-[85%] self-start animate-slide-in-bottom">
+                                <div className="w-[28px] h-[28px] rounded-full bg-gray-200 text-gray-700 flex items-center justify-center shrink-0 mt-4">
+                                    <Bot size={16} />
+                                </div>
+                                <div className="shimmer-wrapper w-[140px] h-[40px] rounded-2xl rounded-tl-none mt-2 shadow-sm border border-black/5" />
+                            </div>
+                        )}
+                        <div ref={messagesEndRef} />
+                    </div>
+
+                    {/* Input Area */}
+                    <div className="p-[10px] bg-white border-t border-black/5 flex items-center gap-8 min-h-[50px] h-auto shrink-0">
+                        <textarea
+                            value={inputValue}
+                            onChange={(e) => setInputValue(e.target.value)}
+                            onKeyDown={handleKeyDown}
+                            placeholder="Type a message..."
+                            className="flex-1 h-[36px] min-h-[36px] bg-[#F1F5F9] border-transparent rounded-full px-16 py-[8px] text-[14px] text-appDarkText file:outline-none focus:ring-2 focus:ring-primary-500/50 resize-none overflow-hidden"
+                            rows={1}
+                        />
+                        <button
+                            onClick={handleSend}
+                            disabled={!inputValue.trim() || isTyping}
+                            className="w-[32px] h-[32px] rounded-full bg-primary-500 text-white flex items-center justify-center shrink-0 hover:bg-primary-600 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                        >
+                            <Send size={14} className="translate-x-[-1px] translate-y-[1px]" />
+                        </button>
+                    </div>
+                </div>
+            )}
+
+            {/* Floating Toggle Button */}
+            {!isOpen && (
+                <button
+                    onClick={() => setIsOpen(true)}
+                    className="w-64 h-64 bg-primary-600 rounded-full flex items-center justify-center text-white shadow-xl shadow-primary-500/30 hover:bg-primary-700 hover:scale-105 transition-all group"
+                >
+                    <Bot size={32} className="group-hover:animate-pulse" />
+                </button>
+            )}
+        </div>
+    )
+}
