@@ -1,4 +1,4 @@
-# AgriSen – An Explainable AI Framework for Intelligent Crop Recommendation
+# XCI(Xplainable Crop Intelligence)– An Explainable AI Framework for Intelligent Crop Recommendation
 
 A full-stack production-ready web application providing intelligent, region-aware crop recommendations powered by a pre-trained Random Forest model, featuring SHAP explainability, and built with modern glassmorphism design.
 
