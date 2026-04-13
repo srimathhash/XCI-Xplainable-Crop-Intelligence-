@@ -148,5 +148,50 @@
         "loading": "Loading weather data...",
         "unavailable": "Weather data currently unavailable.",
         "cached": "Showing last recorded weather data."
+    },
+    "featuresPage": {
+        "unlockTitle": "Unlock Smart Farming",
+        "unlockDesc": "Explore the powerful features designed to maximize your yield and provide explainable insights.",
+        "soilTitle": "Soil-Based Analysis",
+        "soilDesc": "Deep insights into NPK and pH requirements.",
+        "soilDetails": "Soil health is critical to any successful harvest. AgriSen’s soil-based analysis goes beyond suggesting a crop; it identifies precisely which nutrients are deficient. We interpret standard soil test results and provide an intuitive dashboard showing whether your field is heavily acidic or lacks critical phosphorus, guiding your corrective actions.",
+        "smartTitle": "Smart Farming Guidance",
+        "smartDesc": "Actionable steps for modern agriculture.",
+        "smartDetails": "Take the guesswork out of daily operations. From smart fertilizer suggestions tailored to your exact crop and soil state, to optimizing your irrigation schedule based on upcoming weather forecasts. AgriSen provides actionable tasks directly on your dashboard, transforming complex data into simple, everyday farming tasks.",
+        "learnMore": "Learn More →",
+        "aiDetails": "Our AI model analyzes specific Nitrogen, Phosphorous, Potassium (NPK) ratios, pH levels, and local temperature, humidity, and rainfall to recommend the optimal crop for your land. By leveraging historical agricultural data and random forest algorithms, we maximize your yield potential and reduce the risk of crop failure. Simply input your soil test results, and our system will determine the most profitable and sustainable crops for your specific region.",
+        "climateDetails": "We pull real-time, 5-day weather forecasts using world-class APIs, evaluating patterns such as expected rainfall, heat index, and frost warnings. This ensures you do not plant right before a hard frost or miss an optimal sowing window. The system adapts its models contextually to the weather data, alerting you when conditions may require more resilient crop varieties.",
+        "shapDetails": "Unlike black-box AI tools, AgriSen integrates SHAP (SHapley Additive exPlanations) values to build trust. When a crop is recommended, a detailed breakdown reveals which specific factors (e.g., your high soil moisture or local temperature) most heavily influenced the AI’s decision. This transparency empowers farmers to understand the science behind our recommendations.",
+        "aiDesc": "AI-driven suggestions based on soil and climate.",
+        "climateDesc": "Regional climate data analysis for optimal yield.",
+        "shapDesc": "Understand exactly why a crop was recommended.",
+        "aiTitle": "Accurate AI Model",
+        "climateTitle": "Climate Analysis",
+        "shapTitle": "Explainable AI (SHAP)"
+    },
+    "chat": {
+        "hello": "Hello! I'm the AgriSen AI Assistant. Ask me anything about farming, crops, fertilizers, or how to use this platform.",
+        "title": "AgriSen AI Assistant",
+        "subtitle": "Ask anything about farming",
+        "placeholder": "Type a message...",
+        "error": "I am currently unable to access the AI service, but I can still help explain farming concepts and how to use this application.",
+        "promptPrefix": "Please reply to the following message strictly in English language: "
+    },
+    "dashboardAdditions": {
+        "predictionAccuracy": "Prediction Accuracy",
+        "aiPoweredInsights": "AI-Powered Insights",
+        "smartRecommendations": "Smart Recommendations",
+        "farmersSupported": "Farmers Supported",
+        "usersCount": "1000+ Users",
+        "predictionHistoryDesc": "View crops you previously predicted",
+        "smartInsightTitle": "Smart Insight",
+        "bestCropHeader": "Best Crop:",
+        "whyThisCrop": "Why this crop?",
+        "optimalLevel": "Optimal level",
+        "suitableHumidity": "Suitable humidity",
+        "goodPotassium": "Good potassium level",
+        "optimalTemperature": "Optimal temperature",
+        "smartCropRecommendation": "Smart Crop Recommendation",
+        "smartFertilizerSuggestion": "Smart Fertilizer Suggestion"
     }
 }

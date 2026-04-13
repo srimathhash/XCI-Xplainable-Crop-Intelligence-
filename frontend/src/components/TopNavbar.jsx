@@ -34,7 +34,7 @@ export default function TopNavbar() {
     }, [])
 
     return (
-        <header className="sticky top-0 z-[1000] bg-white/85 backdrop-blur-[10px] border-b border-black/5 h-[72px] flex items-center justify-center">
+        <header className="fixed w-full left-0 top-0 z-[1000] bg-white/85 backdrop-blur-[10px] border-b border-black/5 h-[72px] flex items-center justify-center">
             <div className="w-full max-w-[1280px] px-[20px] flex items-center justify-between">
                 {/* Left */}
                 <NavLink to="/landing" className="flex items-center gap-12 transition-opacity hover:opacity-80">
@@ -43,7 +43,7 @@ export default function TopNavbar() {
                     </div>
                     <div className="flex flex-col justify-center">
                         <span className="font-bold text-[24px] tracking-tight text-appDarkText leading-none mt-2">XCI</span>
-                        <span className="text-[12px] font-medium text-appSecondaryText hidden sm:block mt-2 leading-none">Explainable Crop Intelligence</span>
+                        <span className="text-[12px] font-medium text-appSecondaryText hidden sm:block mt-2 leading-none">{t('landing.tagline') || 'Explainable Crop Intelligence'}</span>
                     </div>
                 </NavLink>
 
@@ -57,7 +57,7 @@ export default function TopNavbar() {
                             {t('nav.features') || 'Features'}
                         </NavLink>
                         <NavLink to="/recommend" className={({ isActive }) => `relative text-[15px] font-medium transition-colors duration-200 hover:text-primary-600 ${isActive ? 'text-primary-600' : 'text-appSecondaryText'} after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:bg-primary-600 after:transition-all after:duration-300 ${isActive ? 'after:w-full' : 'after:w-0 hover:after:w-full'}`}>
-                            Recommendation
+                            {t('nav.recommendation')}
                         </NavLink>
                         <NavLink to="/" className={({ isActive }) => `relative text-[15px] font-medium transition-colors duration-200 hover:text-primary-600 ${isActive ? 'text-primary-600' : 'text-appSecondaryText'} after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:bg-primary-600 after:transition-all after:duration-300 ${isActive ? 'after:w-full' : 'after:w-0 hover:after:w-full'}`}>
                             {t('nav.about') || 'About'}
@@ -106,7 +106,7 @@ export default function TopNavbar() {
                                             </div>
                                             <div className="flex flex-col min-w-0">
                                                 <span className="text-[14px] font-bold text-appDarkText truncate">{user.name || 'User'}</span>
-                                                <span className="text-[12px] font-medium text-appSecondaryText truncate">Role: Researcher</span>
+                                                <span className="text-[12px] font-medium text-appSecondaryText truncate">{t('profile.role') || 'Role'}: {t('auth.researcher') || 'Researcher'}</span>
                                             </div>
                                         </div>
                                         <div className="p-8">

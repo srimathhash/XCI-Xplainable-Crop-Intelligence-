@@ -133,9 +133,9 @@ export default function Dashboard() {
                 <div className="flex flex-col gap-[20px] history-section">
                     <div className="flex flex-col">
                         <h3 className="text-[20px] font-bold text-appDarkText flex items-center gap-8">
-                            Prediction History <span className="text-appSecondaryText text-[12px]">▼</span>
+                            {t('history.title') || 'Prediction History'} <span className="text-appSecondaryText text-[12px]">▼</span>
                         </h3>
-                        <p className="text-[13px] text-appSecondaryText font-medium">View crops you previously predicted</p>
+                        <p className="text-[13px] text-appSecondaryText font-medium">{t('dashboardAdditions.predictionHistoryDesc') || 'View crops you previously predicted'}</p>
                     </div>
 
                     {historyLoading ? (
@@ -147,8 +147,8 @@ export default function Dashboard() {
                     ) : history.length === 0 ? (
                         <div className="glass-card bg-white/40 border border-white/70 p-16 flex flex-col items-center justify-center text-center max-h-[140px]">
                             <BrainCircuit size={48} className="text-primary-300 mb-8" />
-                            <h4 className="text-[16px] font-bold text-appDarkText mb-[4px]">No predictions yet</h4>
-                            <p className="text-[13px] text-appSecondaryText">Start by using the Crop Recommendation feature.</p>
+                            <h4 className="text-[16px] font-bold text-appDarkText mb-[4px]">{t('history.empty') || 'No predictions yet'}</h4>
+                            <p className="text-[13px] text-appSecondaryText">{t('dashboard.noResult') || 'Start by using the Crop Recommendation feature.'}</p>
                         </div>
                     ) : (
                         <div className="relative group/scroll">
@@ -194,34 +194,34 @@ export default function Dashboard() {
                     <div className="glass-card p-24 bg-white/60 relative overflow-hidden group animate-fade-in-up" style={{ borderLeft: '4px solid #2e7d32', animationDelay: '0.1s' }}>
                         <div className="absolute top-0 right-0 w-[150px] h-[150px] bg-primary-200/30 rounded-full blur-3xl -translate-y-1/2 translate-x-1/4 pointer-events-none" />
                         <h4 className="text-[14px] font-bold text-appSecondaryText uppercase tracking-wider mb-16 flex items-center gap-8">
-                            <BrainCircuit size={18} className="text-primary-600" /> Smart Insight
+                            <BrainCircuit size={18} className="text-primary-600" /> {t('dashboardAdditions.smartInsightTitle') || 'Smart Insight'}
                         </h4>
 
                         <div className="flex flex-col sm:flex-row sm:items-start gap-24">
                             <div className="flex-1">
                                 <div className="flex items-end gap-12 mb-8">
-                                    <span className="text-[14px] text-appSecondaryText">Best Crop:</span>
-                                    <span className="text-[20px] font-bold text-appDarkText capitalize leading-none">{history[0].crop}</span>
+                                    <span className="text-[14px] text-appSecondaryText">{t('dashboardAdditions.bestCropHeader') || 'Best Crop:'}</span>
+                                    <span className="text-[20px] font-bold text-appDarkText capitalize leading-none">{t(`dynamic.${history[0].crop}`) || history[0].crop}</span>
                                 </div>
                                 <div className="flex items-end gap-12">
-                                    <span className="text-[14px] text-appSecondaryText">Confidence:</span>
+                                    <span className="text-[14px] text-appSecondaryText">{t('dashboard.confidence') || 'Confidence:'}</span>
                                     <span className="text-[16px] font-bold text-primary-700 leading-none">{Math.round(history[0].confidence * 100)}%</span>
                                 </div>
                             </div>
 
                             <div className="flex-1 border-l border-black/5 pl-24">
-                                <span className="block text-[13px] font-semibold text-appDarkText mb-8">Why this crop?</span>
+                                <span className="block text-[13px] font-semibold text-appDarkText mb-8">{t('dashboardAdditions.whyThisCrop') || 'Why this crop?'}</span>
                                 <ul className="flex flex-col gap-4 text-[13px] text-appSecondaryText">
                                     {history[0].top_factors?.slice(0, 3).map((f, i) => (
                                         <li key={i} className="flex items-center gap-8">
                                             <span className="w-4 h-4 rounded-full bg-primary-500 shrink-0" />
-                                            Optimal {f.feature} level
+                                            {t('dashboardAdditions.optimalLevel') || 'Optimal level'} {t(`dynamic.${f.feature}`) || f.feature}
                                         </li>
                                     )) || (
                                             <>
-                                                <li className="flex items-center gap-8"><span className="w-4 h-4 rounded-full bg-primary-500 shrink-0" /> Suitable humidity</li>
-                                                <li className="flex items-center gap-8"><span className="w-4 h-4 rounded-full bg-primary-500 shrink-0" /> Good potassium level</li>
-                                                <li className="flex items-center gap-8"><span className="w-4 h-4 rounded-full bg-primary-500 shrink-0" /> Optimal temperature</li>
+                                                <li className="flex items-center gap-8"><span className="w-4 h-4 rounded-full bg-primary-500 shrink-0" /> {t('dashboardAdditions.suitableHumidity') || 'Suitable humidity'}</li>
+                                                <li className="flex items-center gap-8"><span className="w-4 h-4 rounded-full bg-primary-500 shrink-0" /> {t('dashboardAdditions.goodPotassium') || 'Good potassium level'}</li>
+                                                <li className="flex items-center gap-8"><span className="w-4 h-4 rounded-full bg-primary-500 shrink-0" /> {t('dashboardAdditions.optimalTemperature') || 'Optimal temperature'}</li>
                                             </>
                                         )}
                                 </ul>
@@ -240,7 +240,7 @@ export default function Dashboard() {
                         style={{ background: 'linear-gradient(135deg, #f4fbf6, #e8f5ec)' }}
                     >
                         <h3 className="text-[20px] font-extrabold text-appDarkText leading-[1.2] z-10 mb-8 mt-16">
-                            Smart Crop Recommendation
+                            {t('dashboardAdditions.smartCropRecommendation') || 'Smart Crop Recommendation'}
                         </h3>
 
                         <div className="w-[100px] h-[100px] flex items-center justify-center text-primary-500 mx-auto opacity-90 group-hover:scale-110 transition-transform duration-500">
@@ -269,7 +269,7 @@ export default function Dashboard() {
                         style={{ background: 'linear-gradient(135deg, #f4fbf6, #e8f5ec)' }}
                     >
                         <h3 className="text-[20px] font-extrabold text-appDarkText leading-[1.2] z-10 mb-8 mt-16">
-                            Smart Fertilizer Suggestion
+                            {t('dashboardAdditions.smartFertilizerSuggestion') || 'Smart Fertilizer Suggestion'}
                         </h3>
 
                         <div className="w-[100px] h-[100px] flex items-center justify-center text-primary-500 mx-auto opacity-90 group-hover:scale-110 transition-transform duration-500">
@@ -303,8 +303,8 @@ export default function Dashboard() {
                             <Thermometer size={20} className="text-primary-600" />
                         </div>
                         <div className="flex-1">
-                            <span className="block text-[13px] font-semibold mb-2">{t('dashboard.airQuality') || 'Air Quality'}</span>
-                            <span className="block text-[20px] font-bold leading-none">92%</span>
+                            <span className="block text-[13px] font-semibold mb-2">{t('dashboardAdditions.predictionAccuracy') || 'Prediction Accuracy'}</span>
+                            <span className="block text-[20px] font-bold leading-none">96%</span>
                         </div>
                     </div>
 
@@ -313,8 +313,8 @@ export default function Dashboard() {
                             <Droplets size={20} className="text-blue-600" />
                         </div>
                         <div className="flex-1">
-                            <span className="block text-[13px] font-semibold mb-2">{t('dashboard.soilMoisture') || 'Soil Moisture'}</span>
-                            <span className="block text-[20px] font-bold leading-none">61%</span>
+                            <span className="block text-[13px] font-semibold mb-2">{t('dashboardAdditions.aiPoweredInsights') || 'AI-Powered Insights'}</span>
+                            <span className="block text-[15px] font-bold leading-tight">{t('dashboardAdditions.smartRecommendations') || 'Smart Recommendations'}</span>
                         </div>
                     </div>
 
@@ -323,8 +323,8 @@ export default function Dashboard() {
                             <CloudRain size={20} className="text-cyan-600" />
                         </div>
                         <div className="flex-1">
-                            <span className="block text-[13px] font-semibold mb-2">{t('dashboard.irrigation') || 'Irrigation'}</span>
-                            <span className="block text-[20px] font-bold leading-none">84%</span>
+                            <span className="block text-[13px] font-semibold mb-2">{t('dashboardAdditions.farmersSupported') || 'Farmers Supported'}</span>
+                            <span className="block text-[20px] font-bold leading-none">{t('dashboardAdditions.usersCount') || '1000+ Users'}</span>
                         </div>
                     </div>
                 </div>

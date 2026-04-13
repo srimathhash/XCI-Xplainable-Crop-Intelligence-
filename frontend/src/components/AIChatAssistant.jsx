@@ -1,11 +1,13 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { Bot, X, Send, User, Sprout } from 'lucide-react'
 import { sendChatMessage } from '../services/api'
+import { useLanguage } from '../context/LanguageContext'
 
 export default function AIChatAssistant() {
+    const { t } = useLanguage()
     const [isOpen, setIsOpen] = useState(false)
     const [messages, setMessages] = useState([
-        { role: 'ai', content: "Hello! I'm the AgriSen AI Assistant. Ask me anything about farming, crops, fertilizers, or how to use this platform." }
+        { role: 'ai', content: t('chat.hello') }
     ])
     const [inputValue, setInputValue] = useState('')
     const [isTyping, setIsTyping] = useState(false)
@@ -30,12 +32,12 @@ export default function AIChatAssistant() {
         setIsTyping(true)
 
         try {
-            const res = await sendChatMessage({ message: userMsg.content })
+            const res = await sendChatMessage({ message: t('chat.promptPrefix') + " " + userMsg.content })
             const aiMsg = { role: 'ai', content: res.data.reply }
             setMessages(prev => [...prev, aiMsg])
         } catch (error) {
             console.error("AI Chat Error:", error)
-            setMessages(prev => [...prev, { role: 'ai', content: "I am currently unable to access the AI service, but I can still help explain farming concepts and how to use this application." }])
+            setMessages(prev => [...prev, { role: 'ai', content: t('chat.error') }])
         } finally {
             setIsTyping(false)
         }
@@ -61,8 +63,8 @@ export default function AIChatAssistant() {
                                 <Sprout size={24} className="text-white" />
                             </div>
                             <div>
-                                <h3 className="font-bold text-[16px] leading-[1.2]">AgriSen AI Assistant</h3>
-                                <p className="text-[12px] text-white/80 font-medium">Ask anything about farming</p>
+                                <h3 className="font-bold text-[16px] leading-[1.2]">{t('chat.title')}</h3>
+                                <p className="text-[12px] text-white/80 font-medium">{t('chat.subtitle')}</p>
                             </div>
                         </div>
                         <button
@@ -106,7 +108,7 @@ export default function AIChatAssistant() {
                             value={inputValue}
                             onChange={(e) => setInputValue(e.target.value)}
                             onKeyDown={handleKeyDown}
-                            placeholder="Type a message..."
+                            placeholder={t('chat.placeholder')}
                             className="flex-1 h-[36px] min-h-[36px] bg-[#F1F5F9] border-transparent rounded-full px-16 py-[8px] text-[14px] text-appDarkText file:outline-none focus:ring-2 focus:ring-primary-500/50 resize-none overflow-hidden"
                             rows={1}
                         />

@@ -197,5 +197,12 @@
     width: 300px;
     position: sticky;
     top: 90px;
+    max-height: calc(100vh - 110px);
+    overflow-y: auto;
+    scrollbar-width: none;
+  }
+
+  .weather-panel::-webkit-scrollbar {
+    display: none;
   }
 }
