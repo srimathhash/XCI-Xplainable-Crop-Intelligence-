@@ -53,7 +53,7 @@ export default function ResultCard({ result }) {
                     />
                 )}
                 <h1 className="text-[52px] font-extrabold text-primary-700 leading-none capitalize m-0 text-center drop-shadow-sm flex items-center justify-center">
-                    {displayCrop}
+                    {t(`dynamic.${normalizedCrop}`) || displayCrop}
                 </h1>
             </div>
 
@@ -76,10 +76,10 @@ export default function ResultCard({ result }) {
                 <div className="bg-white/40 p-16 rounded-card border border-white/50 mt-16 shadow-sm">
                     <p className="text-[14px] text-appDarkText font-medium leading-[1.5] m-0">
                         {confidencePct >= 80
-                            ? 'High confidence prediction based on strong climate and soil compatibility.'
+                            ? t('dashboard.highConfidence') || 'High confidence prediction based on strong climate and soil compatibility.'
                             : confidencePct >= 50
-                                ? 'Moderate confidence prediction. Other crops may also be suitable.'
-                                : 'Low confidence prediction. Farmers should consider alternative crops.'}
+                                ? t('dashboard.modConfidence') || 'Moderate confidence prediction. Other crops may also be suitable.'
+                                : t('dashboard.lowConfidence') || 'Low confidence prediction. Farmers should consider alternative crops.'}
                     </p>
                 </div>
             </div>

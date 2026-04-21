@@ -1,4 +1,4 @@
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, HTTPException, Header
 from pydantic import BaseModel
 from schemas.prediction import PredictRequest, PredictResponse, FactorItem
 from services.auth_service import get_current_user
@@ -15,7 +15,7 @@ class RegionPredictRequest(BaseModel):
 
 
 @router.post("/predict", response_model=PredictResponse)
-async def predict(data: PredictRequest, current_user: dict = Depends(get_current_user)):
+async def predict(data: PredictRequest, current_user: dict = Depends(get_current_user), accept_language: str = Header("en")):
     # ── resolve features ──────────────────────────────────────────────────
     required = [data.N, data.P, data.K, data.temperature, data.humidity, data.rainfall, data.ph]
     if any(v is None for v in required):
@@ -42,7 +42,7 @@ async def predict(data: PredictRequest, current_user: dict = Depends(get_current
     crop_probs = sorted(zip(classes, probabilities), key=lambda x: x[1], reverse=True)
     top_crops = [{"crop": c, "score": float(round(p, 4))} for c, p in crop_probs[:3]]
 
-    top_factors, explanation_text, shap_chart = shap_service.explain(features, pred_idx, crop, top_crops)
+    top_factors, explanation_text, shap_chart = shap_service.explain(features, pred_idx, crop, top_crops, accept_language)
 
     # ── Save to history ───────────────────────────────────────────────────
     db = get_db()
@@ -79,7 +79,7 @@ async def predict(data: PredictRequest, current_user: dict = Depends(get_current
 
 
 @router.post("/predict_region", response_model=PredictResponse)
-async def predict_region(data: RegionPredictRequest, current_user: dict = Depends(get_current_user)):
+async def predict_region(data: RegionPredictRequest, current_user: dict = Depends(get_current_user), accept_language: str = Header("en")):
     # ── resolve features ──────────────────────────────────────────────────
     region_data = region_service.get_region_features(data.region, data.season)
     features = {k: region_data[k] for k in ml_service.FEATURE_ORDER}
@@ -98,7 +98,7 @@ async def predict_region(data: RegionPredictRequest, current_user: dict = Depend
     top_crops = [{"crop": c, "score": float(round(p, 4))} for c, p in crop_probs[:3]]
 
     # ── SHAP explanation ──────────────────────────────────────────────────
-    top_factors, explanation_text, shap_chart = shap_service.explain(features, pred_idx, crop, top_crops)
+    top_factors, explanation_text, shap_chart = shap_service.explain(features, pred_idx, crop, top_crops, accept_language)
 
     # ── Save to history ───────────────────────────────────────────────────
     db = get_db()

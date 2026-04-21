@@ -74,7 +74,22 @@
         "selectSeason": "Select Season",
         "summer": "Summer",
         "rainy": "Rainy",
-        "winter": "Winter"
+        "winter": "Winter",
+        "climateInput": "Climate Input",
+        "soilInput": "Soil Input",
+        "highConfidence": "High confidence prediction based on strong climate and soil compatibility.",
+        "climateConditions": "Climate & Soil Conditions",
+        "modConfidence": "Moderate confidence prediction. Other crops may also be suitable.",
+        "lowConfidence": "Low confidence prediction. Farmers should consider alternative crops.",
+        "shapDesc": "SHAP values indicate each feature's logical contribution to the final prediction.",
+        "andWord": "and",
+        "sentence1": "{crop} is recommended because the current soil and climate conditions closely match its optimal growth requirements.",
+        "sentence1_fallback": "{crop} is recommended based on the provided soil and climate parameters.",
+        "sentence2": "{primary_factors} strongly support {crop} cultivation{secondary_factors}",
+        "sentence2_secondary": ", while {secondary_list} also contribute positively.",
+        "sentence2_none": " levels.",
+        "sentence3_two": "Other crops such as {alt0} and {alt1} were evaluated, but their optimal temperature and rainfall requirements are less compatible with the current environment.",
+        "sentence3_one": "Another crop such as {alt0} was evaluated, but its optimal requirements are less compatible with the current environment."
     },
     "prediction": {
         "back": "Back to Dashboard",

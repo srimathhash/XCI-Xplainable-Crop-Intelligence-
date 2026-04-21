@@ -9,7 +9,12 @@ const translations = { en, te, hi }
 const LanguageContext = createContext(null)
 
 export function LanguageProvider({ children }) {
-    const [lang, setLang] = useState('en')
+    const [lang, setLangState] = useState(localStorage.getItem('agrisen_lang') || 'en')
+
+    const setLang = (newLang) => {
+        setLangState(newLang)
+        localStorage.setItem('agrisen_lang', newLang)
+    }
 
     const t = (key) => {
         const keys = key.split('.')

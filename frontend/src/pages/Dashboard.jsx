@@ -173,9 +173,9 @@ export default function Dashboard() {
                                                 {getCropIcon(item.crop)}
                                             </div>
                                             <div className="text-center mt-auto">
-                                                <span className={`block font-bold text-[16px] capitalize ${textMain}`}>{item.crop}</span>
+                                                <span className={`block font-bold text-[16px] capitalize ${textMain}`}>{t(`dynamic.${item.crop.toLowerCase()}`) || item.crop}</span>
                                                 <span className={`block font-semibold text-[13px] ${textSub}`}>
-                                                    Confidence {Math.round(item.confidence * 100)}%
+                                                    {t('dashboard.confidence') || 'Confidence'} {Math.round(item.confidence * 100)}%
                                                 </span>
                                             </div>
                                         </div>

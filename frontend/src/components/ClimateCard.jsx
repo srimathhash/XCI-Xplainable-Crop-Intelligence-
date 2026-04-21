@@ -13,39 +13,39 @@ export default function ClimateCard({ result }) {
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-16 relative z-10 p-16 bg-white/40 rounded-card border border-white/50 hover:bg-white/60 transition-colors">
                 <div className="space-y-8 pr-12">
                     <p className="text-[12px] font-bold text-appSecondaryText uppercase tracking-wider mb-12 flex items-center gap-8">
-                        🌤️ Climate Input
+                        🌤️ {t('dashboard.climateInput') || 'Climate Input'}
                     </p>
                     <div className="flex justify-between text-[14px] border-b border-black/5 pb-4">
-                        <span className="text-appSecondaryText font-medium">Temperature:</span>
+                        <span className="text-appSecondaryText font-medium">{t('dynamic.Temperature') || 'Temperature'}:</span>
                         <span className="font-bold text-appDarkText">{result.temperature}°C</span>
                     </div>
                     <div className="flex justify-between text-[14px] border-b border-black/5 pb-4">
-                        <span className="text-appSecondaryText font-medium">Humidity:</span>
+                        <span className="text-appSecondaryText font-medium">{t('dynamic.Humidity') || 'Humidity'}:</span>
                         <span className="font-bold text-appDarkText">{result.humidity}%</span>
                     </div>
                     <div className="flex justify-between text-[14px] border-b border-black/5 pb-4">
-                        <span className="text-appSecondaryText font-medium">Rainfall:</span>
+                        <span className="text-appSecondaryText font-medium">{t('dynamic.Rainfall') || 'Rainfall'}:</span>
                         <span className="font-bold text-appDarkText">{result.rainfall} mm</span>
                     </div>
                 </div>
                 <div className="space-y-8 pl-12 sm:border-l sm:border-black/5">
                     <p className="text-[12px] font-bold text-appSecondaryText uppercase tracking-wider mb-12 flex items-center gap-8">
-                        🌱 Soil Input
+                        🌱 {t('dashboard.soilInput') || 'Soil Input'}
                     </p>
                     <div className="flex justify-between text-[14px] border-b border-black/5 pb-4">
-                        <span className="text-appSecondaryText font-medium">Nitrogen (N):</span>
+                        <span className="text-appSecondaryText font-medium">{t('dynamic.Nitrogen') || 'Nitrogen (N)'}:</span>
                         <span className="font-bold text-appDarkText">{result.N}</span>
                     </div>
                     <div className="flex justify-between text-[14px] border-b border-black/5 pb-4">
-                        <span className="text-appSecondaryText font-medium">Phosphorus (P):</span>
+                        <span className="text-appSecondaryText font-medium">{t('dynamic.Phosphorus') || 'Phosphorus (P)'}:</span>
                         <span className="font-bold text-appDarkText">{result.P}</span>
                     </div>
                     <div className="flex justify-between text-[14px] border-b border-black/5 pb-4">
-                        <span className="text-appSecondaryText font-medium">Potassium (K):</span>
+                        <span className="text-appSecondaryText font-medium">{t('dynamic.Potassium') || 'Potassium (K)'}:</span>
                         <span className="font-bold text-appDarkText">{result.K}</span>
                     </div>
                     <div className="flex justify-between text-[14px] border-b border-black/5 pb-4">
-                        <span className="text-appSecondaryText font-medium">pH Level:</span>
+                        <span className="text-appSecondaryText font-medium">{t('dynamic.pH') || 'pH Level'}:</span>
                         <span className="font-bold text-appDarkText">{result.pH}</span>
                     </div>
                 </div>

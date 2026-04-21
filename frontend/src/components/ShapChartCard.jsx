@@ -65,7 +65,7 @@ export default function ShapChartCard({ result }) {
                 </div>
             </div>
             <p className="text-[13px] text-appSecondaryText mt-12 text-center italic">
-                SHAP values indicate each feature's logical contribution to the final prediction.
+                {t('dashboard.shapDesc') || "SHAP values indicate each feature's logical contribution to the final prediction."}
             </p>
         </div>
     )
