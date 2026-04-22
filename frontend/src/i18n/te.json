@@ -1,5 +1,7 @@
 {
     "nav": {
+        "home": "హోమ్",
+        "features": "ఫీచర్లు",
         "overview": "అవలోకనం",
         "recommendation": "పంట సూచన",
         "analytics": "విశ్లేషణ",

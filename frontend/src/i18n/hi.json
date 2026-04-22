@@ -1,5 +1,7 @@
 {
     "nav": {
+        "home": "होम",
+        "features": "विशेषताएं",
         "overview": "अवलोकन",
         "recommendation": "फसल अनुशंसा",
         "analytics": "विश्लेषण",

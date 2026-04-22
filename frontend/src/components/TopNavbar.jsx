@@ -59,9 +59,6 @@ export default function TopNavbar() {
                         <NavLink to="/recommend" className={({ isActive }) => `relative text-[15px] font-medium transition-colors duration-200 hover:text-primary-600 ${isActive ? 'text-primary-600' : 'text-appSecondaryText'} after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:bg-primary-600 after:transition-all after:duration-300 ${isActive ? 'after:w-full' : 'after:w-0 hover:after:w-full'}`}>
                             {t('nav.recommendation')}
                         </NavLink>
-                        <NavLink to="/" className={({ isActive }) => `relative text-[15px] font-medium transition-colors duration-200 hover:text-primary-600 ${isActive ? 'text-primary-600' : 'text-appSecondaryText'} after:content-[''] after:absolute after:bottom-[-4px] after:left-0 after:h-[2px] after:bg-primary-600 after:transition-all after:duration-300 ${isActive ? 'after:w-full' : 'after:w-0 hover:after:w-full'}`}>
-                            {t('nav.about') || 'About'}
-                        </NavLink>
                     </nav>
 
                     {/* Search Bar */}
