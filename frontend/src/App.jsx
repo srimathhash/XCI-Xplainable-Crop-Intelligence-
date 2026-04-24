@@ -61,10 +61,10 @@ export default function App() {
               <Route path="/otp" element={<OtpVerifyPage />} />
               <Route path="/verify-otp" element={<Navigate to="/otp" replace />} />
 
-              <Route path="/features" element={<FeaturesPage />} />
-
               {/* All pages inside MainLayout get the global Navbar */}
               <Route element={<MainLayout />}>
+
+                <Route path="/features" element={<FeaturesPage />} />
 
                 {/* Protected Routes */}
                 <Route path="/dashboard" element={

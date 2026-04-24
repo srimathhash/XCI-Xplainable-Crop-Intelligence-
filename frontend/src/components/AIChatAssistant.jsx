@@ -2,6 +2,9 @@ import React, { useState, useRef, useEffect } from 'react'
 import { Bot, X, Send, User, Sprout } from 'lucide-react'
 import { sendChatMessage } from '../services/api'
 import { useLanguage } from '../context/LanguageContext'
+import ReactMarkdown from 'react-markdown'
+import remarkGfm from 'remark-gfm'
+import rehypeRaw from 'rehype-raw'
 
 export default function AIChatAssistant() {
     const { t } = useLanguage()
@@ -55,7 +58,7 @@ export default function AIChatAssistant() {
 
             {/* Chat Window */}
             {isOpen && (
-                <div className="mb-16 w-[340px] h-[480px] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-black/5 animate-fade-in group">
+                <div className="mb-16 w-[400px] h-[600px] bg-white rounded-2xl shadow-2xl flex flex-col overflow-hidden border border-black/5 animate-fade-in group">
                     {/* Header */}
                     <div className="bg-primary-600 text-white h-[56px] px-16 flex items-center justify-between shrink-0">
                         <div className="flex items-center gap-12">
@@ -84,8 +87,35 @@ export default function AIChatAssistant() {
                                     <div className={`w-[28px] h-[28px] rounded-full flex items-center justify-center shrink-0 mt-4 ${isUser ? 'bg-primary-100 text-primary-700' : 'bg-gray-200 text-gray-700'}`}>
                                         {isUser ? <User size={16} /> : <Bot size={16} />}
                                     </div>
-                                    <div className={`p-[10px] rounded-2xl text-[14px] leading-[1.5] ${isUser ? 'bg-primary-500 text-white rounded-tr-none' : 'bg-gray-100 border border-black/5 text-appDarkText rounded-tl-none shadow-sm'}`}>
-                                        {msg.content}
+                                    <div className={`p-[10px] rounded-2xl text-[14px] leading-[1.5] ${isUser ? 'bg-primary-500 text-white rounded-tr-none' : 'bg-gray-100 border border-black/5 text-appDarkText rounded-tl-none shadow-sm overflow-x-auto break-words'}`}>
+                                        {isUser ? (
+                                            msg.content
+                                        ) : (
+                                            <ReactMarkdown
+                                                remarkPlugins={[remarkGfm]}
+                                                rehypePlugins={[rehypeRaw]}
+                                                components={{
+                                                    p: ({ node, ...props }) => <p className="text-[14px] mb-2 last:mb-0" {...props} />,
+                                                    ul: ({ node, ...props }) => <ul className="list-disc pl-5 mb-2 space-y-1 text-[14px]" {...props} />,
+                                                    ol: ({ node, ...props }) => <ol className="list-decimal pl-5 mb-2 space-y-1 text-[14px]" {...props} />,
+                                                    li: ({ node, ...props }) => <li className="" {...props} />,
+                                                    h1: ({ node, ...props }) => <h1 className="font-bold text-[18px] mb-3 mt-4 first:mt-0 text-gray-900 leading-tight" {...props} />,
+                                                    h2: ({ node, ...props }) => <h2 className="font-bold text-[17px] mb-3 mt-4 first:mt-0 text-gray-800 leading-tight" {...props} />,
+                                                    h3: ({ node, ...props }) => <h3 className="font-bold text-[16px] mb-2 mt-3 first:mt-0 text-gray-800 leading-tight" {...props} />,
+                                                    h4: ({ node, ...props }) => <h4 className="font-semibold text-[15px] mb-1 mt-2 first:mt-0 text-gray-800 leading-tight" {...props} />,
+                                                    table: ({ node, ...props }) => <div className="overflow-x-auto mb-2 border border-black/10 rounded"><table className="min-w-full divide-y divide-black/10 text-left" {...props} /></div>,
+                                                    thead: ({ node, ...props }) => <thead className="bg-black/5" {...props} />,
+                                                    tbody: ({ node, ...props }) => <tbody className="divide-y divide-black/5" {...props} />,
+                                                    th: ({ node, ...props }) => <th className="px-3 py-2 text-[13px] font-semibold text-gray-700 bg-black/5" {...props} />,
+                                                    td: ({ node, ...props }) => <td className="px-3 py-2 text-[13px] text-gray-700 align-top" {...props} />,
+                                                    strong: ({ node, ...props }) => <strong className="font-semibold text-gray-900" {...props} />,
+                                                    a: ({ node, ...props }) => <a className="text-primary-600 hover:underline" {...props} />,
+                                                    code: ({ node, inline, ...props }) => inline ? <code className="bg-black/5 px-1 py-0.5 rounded text-[12px] font-mono text-gray-800" {...props} /> : <pre className="bg-gray-800 text-white p-3 rounded-lg overflow-x-auto text-[12px] font-mono mb-2"><code {...props} /></pre>,
+                                                }}
+                                            >
+                                                {msg.content}
+                                            </ReactMarkdown>
+                                        )}
                                     </div>
                                 </div>
                             )

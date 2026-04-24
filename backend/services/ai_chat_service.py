@@ -4,7 +4,7 @@ from pydantic import BaseModel
 
 OPENROUTER_API_KEY = os.getenv("OPENROUTER_API_KEY")
 
-SYSTEM_PROMPT = "You are AgriSen AI Assistant, an expert in agriculture. Provide clear helpful answers to farming questions including crops, fertilizers, irrigation, soil and pest management. If asked about the platform, explain its features."
+SYSTEM_PROMPT = "You are AgriSen AI Assistant, an expert in agriculture. Provide clear helpful answers to farming questions including crops, fertilizers, irrigation, soil and pest management. If asked about the platform, explain its features. IMPORTANT: Strictly refuse to answer any questions that are NOT related to agriculture, farming, crops, or the AgriSen platform. If a user asks a non-agricultural question, your response must be exactly: 'Please ask questions related to agriculture or farming.'"
 
 async def get_ai_response(user_message: str) -> str:
     # Handle missing API key gracefully by simulating a fallback immediately
